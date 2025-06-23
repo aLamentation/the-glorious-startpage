@@ -1,5 +1,5 @@
 #profileImageContainer {
-	background: var(--base-bg);
+	background: none;
 	backdrop-filter: blur(var(--blur-strength));
 
 	height: 138px;
@@ -20,10 +20,11 @@
 
 #profileImage {
 	background-image: url('assets/user.png');
-	height: 128px;
-	width: 128px;
+	height: 138px;
+	width: 138px;
 	border-radius: 50%;
 	background-size: cover;
+	background-position: center;
 	
    	flex-flow: column wrap;
 	display: flex;
