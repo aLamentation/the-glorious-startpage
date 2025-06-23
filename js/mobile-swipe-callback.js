@@ -19,9 +19,6 @@ class SwipeEventCallbacks extends SwipeEventManager {
 		} else if (d === 'right') {
 			// Swiping right will open web menu
 			webMenu.toggleWebMenu();
-		} else if (d === 'up') {
-			// Swiping up will open weather screen
-			weatherScreen.toggleWeatherScreen();
 		}
 	}
 

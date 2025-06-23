@@ -58,7 +58,6 @@ class DockButtons {
 			aDock.className = 'dockLink';
 			aDock.href = url;
 			aDock.tabIndex = '-1';
-			aDock.target = '_blank';
 			aDock.title = site;
 	
 			// Create div container

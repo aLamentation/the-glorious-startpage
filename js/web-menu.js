@@ -79,7 +79,7 @@ class WebMenu {
 			li.insertAdjacentHTML(
 				'afterbegin',
 				`
-				<a class='webMenuLink' href='${url}' tabindex='-1' target='_blank'>
+				<a class='webMenuLink' href='${url}' tabindex='-1' title='${site}'>
 					<div class='webItem' id='${'id' + site}'>
 						<div class='webItemContainer'>
 							<div class='webItemBody'>
