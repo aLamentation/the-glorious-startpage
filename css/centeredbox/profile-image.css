@@ -9,6 +9,7 @@
 	
 	margin: 0 auto;
 	margin-bottom: 110px;
+	margin-top: 120px;
 	position: relative;
 
    	flex-flow: column wrap;
@@ -18,7 +19,7 @@
 }
 
 #profileImage {
-	background-image: url('../../assets/user.png');
+	background-image: url('assets/user.png');
 	height: 128px;
 	width: 128px;
 	border-radius: 50%;
@@ -43,5 +44,15 @@
 	
 	to {
 		transform: rotate(360deg);
+	}
+}
+
+#profileImageContainer > #clock {
+	margin-bottom: 32px;
+}
+
+@media screen and (max-width: 470px) {
+	#profileImageContainer > #clock {
+		margin-bottom: 48px;
 	}
 }

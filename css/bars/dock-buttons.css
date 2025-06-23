@@ -5,7 +5,7 @@
 	height: 36px;
 	position: relative;
 	border-radius: var(--rounded-radius);
-	margin: 2px;
+	margin: 10px;
 	padding: 5px;
 	border: none;
 	cursor: pointer;

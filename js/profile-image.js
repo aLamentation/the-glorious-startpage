@@ -21,6 +21,11 @@ class ProfileImage {
 	_init = () => {
 		this._registerAnimationEndEvent();
 		this._registerOnClickEvent();
+		// 设置头像图片
+		const profileImage = document.getElementById('profileImage');
+		if (profileImage) {
+			profileImage.style.backgroundImage = "url('assets/user.png')";
+		}
 	}
 
 	rotateProfile = () => {

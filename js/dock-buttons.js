@@ -31,24 +31,20 @@ class DockButtons {
 	}
 
 	_generateFromManual = (id, icon, callback) => {
-
 		const dockButton = this._buildDockButton(
 			`button${id}`,
 			'dockButton',
 			callback
 		);
-
 		const buttonImage = this._buildDockButtonImage(
 			`buttonImage${id}`,
 			'dockButtonImage',
 			`url('assets/buttons/${icon}.svg')`
 		);
-			
 		dockButton.appendChild(buttonImage);
-
 		this._dock.appendChild(dockButton);
 	}
-	
+
 	_generateFromList = () => {
 
 		for (let i = 0; i < (this.dockSites.length); i++) {
@@ -62,6 +58,8 @@ class DockButtons {
 			aDock.className = 'dockLink';
 			aDock.href = url;
 			aDock.tabIndex = '-1';
+			aDock.target = '_blank';
+			aDock.title = site;
 	
 			// Create div container
 			const dockButton = this._buildDockButton(
@@ -85,40 +83,17 @@ class DockButtons {
 	}
 
 	_populateDock = () => {
-	
-		// Create launcher button
+		// 先渲染 launch.svg 按钮
 		this._generateFromManual(
 			'Launch',
-			'launch', 
+			'launch',
 			() => {
-				// Toggle web menu
+				// 打开大屏展示所有跳转按钮
 				webMenu.toggleWebMenu();
 			}
 		);
-	
-		// Create dock buttons fetched from sites-list.js
+		// 再渲染 getDockSites 返回的按钮（目前只有朋友圈）
 		this._generateFromList();
-	
-		// Create weather button
-		this._generateFromManual(
-			'Weather',
-			'weather', 
-			() => {
-				// Toggle weather screen
-				weatherScreen.toggleWeatherScreen();
-			}
-		);
-	
-		// Create menu button
-		this._generateFromManual(
-			'Dashboard',
-			'dashboard', 
-			() => {
-				// Toggle dashboard
-				dashboard.toggleDashboard();
-			}
-		);
-
 	}
 }
 

@@ -3,7 +3,7 @@ class WebMenu {
 	constructor() {
 		this._dashboard = document.querySelector('#rightDashboard');
 		this._weatherScreen = document.querySelector('#weatherScreen');
-		this._webSites = config.getWebSites();
+		this._webSites = config.getDockSites();
 
 		this._webMenuScreen = document.querySelector('#webMenuScreen');
 		this._webMenuList = document.querySelector('#webMenuList');
@@ -14,6 +14,9 @@ class WebMenu {
 
 		this._webItemFocus;
 		this._webListIndex = 0;
+
+		// 增加防抖定时器属性
+		this._debounceTimer = null;
 
 		this._init();
 	}
@@ -76,7 +79,7 @@ class WebMenu {
 			li.insertAdjacentHTML(
 				'afterbegin',
 				`
-				<a class='webMenuLink' href='${url}' tabindex='-1'>
+				<a class='webMenuLink' href='${url}' tabindex='-1' target='_blank'>
 					<div class='webItem' id='${'id' + site}'>
 						<div class='webItemContainer'>
 							<div class='webItemBody'>
@@ -125,47 +128,24 @@ class WebMenu {
 		};
 	}
 
-	// Focus on searched item
-	_filterWebList = () => {
-
-		let input, filter, ul, li, a, i, txtValue;
-		
-		input = webMenuSearchBox;
-		filter = input.value.toUpperCase();
-		ul = this._webMenuList;
-		li = ul.getElementsByTagName('li');
-		
-		// Loop through all list items, and focus if matches the search query
-		for (let i = 0; i < li.length; i++) {
-
-			a = li[parseInt(i, 10)].getElementsByClassName('webItemName')[0];
-			txtValue = a.textContent || a.innerText;
-
-			// If an item match, hightlight it and focus
-			// if (txtValue.toUpperCase().indexOf(filter) !== -1) {
-			if (txtValue.toUpperCase().fuzzy(filter, 1) === true) {
-				
-				// Unselect/Unhightlight old active
-				const oldWebItemFocus = this._webItemFocus;
-				const oldWebItemFocusChild = oldWebItemFocus.querySelector('.webItem');
-				oldWebItemFocusChild.classList.remove('webItemFocus');
-
-				// Update webItemFocus
-				this._webItemFocus = li[parseInt(i, 10)];
-
-				// Update weblistindex
-				this._webListIndex = i;
-
-				// Get child
-				const webItemFocusChild = this._webItemFocus.querySelector('.webItem');
-				// Add webItemFocus class to child
-				webItemFocusChild.classList.add('webItemFocus');
-
-				// Scroll focus into active
-				this._webItemFocus.scrollIntoView();
-
+	// 实时过滤 webMenuList，仅展示中文名匹配的按钮（防抖1秒）
+	_filterWebListDebounced = () => {
+		if (this._debounceTimer) clearTimeout(this._debounceTimer);
+		this._debounceTimer = setTimeout(() => {
+			const input = this._webMenuSearchBox;
+			const filter = input.value.trim();
+			const ul = this._webMenuList;
+			const li = ul.getElementsByTagName('li');
+			for (let i = 0; i < li.length; i++) {
+				const a = li[i].getElementsByClassName('webItemName')[0];
+				const txtValue = a.textContent || a.innerText;
+				if (filter === '' || txtValue.indexOf(filter) !== -1) {
+					li[i].style.display = '';
+				} else {
+					li[i].style.display = 'none';
+				}
 			}
-		}
+		}, 1000);
 	}
 
 	// Reset focus/go back to item #1
@@ -214,7 +194,7 @@ class WebMenu {
 		this._webMenuSearchBox.blur();
 
 		// Refilter web list
-		this._filterWebList();
+		this._filterWebListDebounced();
 		
 		// Scroll to top
 		this._webMenuListContainer.scrollTop = 0;
@@ -380,34 +360,21 @@ class WebMenu {
 	}
 
 	_webMenuSearchBoxKeyDownEvent = e => {
-
-		// Don't hijack keyboard navigation buttons (up, down, left, right)
+		// 不劫持方向键、Tab、Esc等
 		if ((e.key === 'ArrowRight') || (e.key === 'ArrowDown') || 
-			(e.key === 'ArrowLeft') || (e.key === 'ArrowUp')) return;
-
-		if (e.key === 'Tab') return;
+			(e.key === 'ArrowLeft') || (e.key === 'ArrowUp') ||
+			(e.key === 'Tab') || (e.key === 'Escape') || (e.key === 'Alt')) return;
 
 		if (e.key === 'Enter' && this._webItemFocus) {
-
-			// Run the focused li's callback
 			this._webItemFocus.callback();
-
-			// Hide web menu
 			this.toggleWebMenu();
-
-		} else if (e.key === 'Backspace' && webMenuSearchBox.value.length  < 1) {
-			// Hide web menu if backspace is pressed and searchbox value is 0
+		} else if (e.key === 'Backspace' && this._webMenuSearchBox.value.length < 1) {
 			this.toggleWebMenu();
-			return;
-
-		} else if ((e.key === 'Escape') || (e.key === 'Alt')) {
-			// Ignore escape and alt key
 			return;
 		}
 
-		// Filter
-		this._filterWebList();
-
+		// 防抖过滤
+		this._filterWebListDebounced();
 	}
 
 	_registerWebMenuSearchBoxKeyDownEvent = () => {

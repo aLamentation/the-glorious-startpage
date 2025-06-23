@@ -20,7 +20,7 @@ class SearchQuerySend {
 
 	// Open link
 	_openURL = url => {
-		window.location.href = encodeURI(url);
+		window.open(encodeURI(url), '_blank');
 	}
 
 	// Quick search

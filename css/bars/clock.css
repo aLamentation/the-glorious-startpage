@@ -1,12 +1,32 @@
 #clock {
 	color: var(--base-color);
-	font-size: 11pt;
-	font-family: roboto-bold, sans-serif;
+	font-size: 32pt;
+	font-family: 'Quicksand', 'Arial Rounded MT Bold', 'Roboto', 'sans-serif';
 	font-weight: 700;
-
-	/* Center lock */
 	text-align: center;
-   	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
+	margin-bottom: 16px;
+	position: static;
+	transform: none;
+}
+
+#profileImageContainer {
+	margin-top: 48px;
+}
+
+.clock-time {
+	font-size: 64pt;
+	font-family: 'Quicksand', 'Arial Rounded MT Bold', 'Roboto', 'sans-serif';
+	font-weight: 700;
+	letter-spacing: 2px;
+	line-height: 1.1;
+}
+
+.clock-date {
+	font-size: 18pt;
+	font-family: 'Quicksand', 'Arial Rounded MT Bold', 'Roboto', 'sans-serif';
+	font-weight: 400;
+	color: #b0b0b0;
+	margin-top: 8px;
+	letter-spacing: 1px;
+	line-height: 1.2;
 }

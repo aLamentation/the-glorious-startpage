@@ -6,6 +6,7 @@
 	height: 100vh;
 	margin: 0;
 	background: var(--panel-bg);
+	z-index: 10;
 	
 	overflow: hidden;
 	backdrop-filter: blur(var(--blur-strength));

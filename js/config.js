@@ -333,47 +333,47 @@ class Config {
 
 	getDockSites = () => {
 		// Dock
-		// A list of websites that will be generated and put on the dock
+		// 只保留朋友圈按钮
 		const dockSites = [
 			{
-				site: 'Reddit',
-				icon: 'reddit',
-				url: 'https://reddit.com/'
+				site: '影视',
+				icon: 'television',
+				url: 'https://tv.l-zs.com/'
 			},
 			{
-				site: 'Github',
-				icon: 'github',
-				url: 'https://github.com/'
+				site: '简历',
+				icon: 'resume',
+				url: 'https://resume.l-zs.com/'
 			},
 			{
-				site: 'Facebook',
-				icon: 'facebook',
-				url: 'https://facebook.com/'
+				site: '游戏',
+				icon: 'game',
+				url: 'https://game.l-zs.com/'
 			},
 			{
-				site: 'Gmail',
-				icon: 'gmail',
-				url: 'https://mail.google.com/'
+				site: '博客',
+				icon: 'blog',
+				url: 'https://blog.l-zs.com/'
 			},
 			{
-				site: 'Youtube',
-				icon: 'youtube',
-				url: 'https://youtube.com/'
+				site: '新闻',
+				icon: 'news',
+				url: 'https://news.l-zs.com/'
 			},
 			{
-				site: 'GDrive',
-				icon: 'gdrive',
-				url: 'https://drive.google.com/'
+				site: '音乐',
+				icon: 'music',
+				url: 'https://music.l-zs.com/'
 			},
 			{
-				site: 'Twitter',
-				icon: 'twitter',
-				url: 'https://twitter.com/'
+				site: '朋友圈',
+				icon: 'moments',
+				url: 'https://moments.l-zs.com/'
 			},
 			{
-				site: 'Material.io',
-				icon: 'materialio',
-				url: 'https://material.io/'
+				site: '聊天室',
+				icon: 'chat',
+				url: 'https://chat.l-zs.com/'
 			}
 		];
 

@@ -16,22 +16,27 @@ class Clock {
 	}
 
 	_setTime = () => {
-		// Date object
 		const date = new Date();
-
-		// Set hour, minute
+		// 时间部分
 		let hour = date.getHours();
 		let min = date.getMinutes();
-		let midDay = 'AM';
-		
-		// Assigning
-		midDay = (hour >= 12) ? 'PM' : 'AM';
-		hour = (hour === 0) ? 12 : ((hour > 12) ? (hour - 12) : hour);
 		hour = this._appendZero(hour);
 		min = this._appendZero(min);
+		const timeStr = `${hour}:${min}`;
 
-		// Update clock id element
-		this._clockEl.innerText = `${hour}:${min} ${midDay}` ;
+		// 日期部分
+		const year = date.getFullYear();
+		const month = date.getMonth() + 1;
+		const day = date.getDate();
+		const weekArr = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+		const weekStr = weekArr[date.getDay()];
+		const dateStr = `${year}年${month}月${day}日 ${weekStr}`;
+
+		// Windows锁屏风格：大号时间+下方日期
+		this._clockEl.innerHTML = `
+			<div class="clock-time">${timeStr}</div>
+			<div class="clock-date">${dateStr}</div>
+		`;
 	}
 
 	_startClock = () => {
