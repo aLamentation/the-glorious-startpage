@@ -2,6 +2,7 @@
 
 #dummyBodyBackground {
 	background: var(--base-body-bg);
+	background-color: #1a1a1a;
 	position: absolute;
 	top: 0;
 	left: 0;
